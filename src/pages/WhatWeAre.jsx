@@ -315,6 +315,25 @@ const styles = `
   }
 }
 
+/* ---------- hero photography ---------- */
+.joju .hero-photo {
+  animation: jjPhotoDrift 24s ease-in-out infinite alternate;
+  transform: scale(1.06);
+}
+.joju .hero-sheen {
+  background: linear-gradient(112deg, transparent 28%, rgba(255,255,255,.18) 48%, transparent 66%);
+  background-size: 240% 100%;
+  animation: jjPhotoSheen 9s ease-in-out infinite;
+}
+@keyframes jjPhotoDrift {
+  from { transform: scale(1.06) translate3d(0, 0, 0); }
+  to { transform: scale(1.14) translate3d(-1.2%, 1%, 0); }
+}
+@keyframes jjPhotoSheen {
+  0%, 58% { background-position: 120% 0; }
+  100% { background-position: -80% 0; }
+}
+
 /* ---------- motion ---------- */
 @keyframes jjRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 .joju .rise { opacity: 0; animation: jjRise .9s cubic-bezier(.2,.7,.2,1) forwards; }
@@ -336,7 +355,7 @@ const styles = `
 @keyframes jjPulse { 0%,100% { opacity: .5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.15); } }
 .joju .pulse { animation: jjPulse 2.6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .joju .rise, .joju .float, .joju .flicker, .joju .spin, .joju .spin-rev, .joju .pulse, .joju .orb { animation: none; opacity: 1; }
+  .joju .rise, .joju .float, .joju .flicker, .joju .spin, .joju .spin-rev, .joju .pulse, .joju .orb, .joju .hero-photo, .joju .hero-sheen { animation: none; opacity: 1; }
 }
 
 /* ---------- scroll reveal ---------- */
@@ -569,22 +588,21 @@ function WhatWeAre() {
 
             {/* HERO VISUAL */}
             <div data-reveal="right" className="relative mx-auto w-full max-w-[520px]">
-              {/* Replace with an actual Joju Ventures gas facility photograph */}
               <div className="glass-strong relative mx-auto w-[min(88vw,390px)] rounded-[40px] p-3.5 sm:rounded-[48px] sm:p-4">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[30px] bg-gradient-to-b from-[#10233D] to-[#020713] sm:rounded-[36px]">
-                  <div className="spin absolute left-1/2 top-[42%] h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#BD9B88]/35">
-                    <span className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[#BD9B88] shadow-[0_0_20px_#BD9B88]" />
+                <div className="group relative aspect-[4/5] overflow-hidden rounded-[30px] bg-gradient-to-b from-[#10233D] to-[#020713] sm:rounded-[36px]">
+                  <img
+                    src="/joju-in.png"
+                    alt="Joju Gas entrance and service location"
+                    className="hero-photo absolute inset-0 h-full w-full object-cover object-[28%_center]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#030B18]/10 via-[#030B18]/5 to-[#020713]/90" />
+                  <div className="hero-sheen pointer-events-none absolute inset-0 opacity-60" />
+                  <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-[#030B18]/45 px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#F4ECE6] backdrop-blur-md">
+                    <span className="pulse h-1.5 w-1.5 rounded-full bg-[#E6CDBD]" />
+                    Joju Gas
                   </div>
-                  <div className="spin-rev absolute left-1/2 top-[42%] h-[54%] w-[54%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#BD9B88]/25">
-                    <span className="absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-[#E6CDBD]" />
-                  </div>
-                  <div className="pulse absolute left-1/2 top-[42%] h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#BD9B88]/30 blur-3xl" />
 
-                  <div className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2">
-                    <Flame size={115} strokeWidth={1.2} className="flicker text-[#BD9B88]" fill="rgba(189,155,136,0.18)" />
-                  </div>
-
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#020713] via-[#020713]/85 to-transparent p-6 pt-24">
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#020713] via-[#020713]/80 to-transparent p-6 pt-24 sm:p-7 sm:pt-28">
                     <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#BD9B88]">
                       Joju Ventures
                     </span>
